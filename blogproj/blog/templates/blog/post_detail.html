@@ -1,0 +1,34 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p>Author: {{ post.author }} | Published on: {{ post.created_at|date:"d M Y" }}</p>
+    <p>{{ post.content }}</p>
+
+    <hr>
+
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in comments %}
+            <li><strong>{{ comment.author }}:</strong> {{ comment.body }} <br>
+                <small>Published on {{ comment.created_at|date:"d M Y H:i" }}</small>
+            </li>
+        {% empty %}
+            <p>No comments yet.</p>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <h2>Add a comment</h2>
+    {% if user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit comment</button>
+        </form>
+        <p>Comments will be visible only after they are approved by an administrator.</p> <!-- Messaggio aggiornato in inglese -->
+    {% else %}
+        <p>You have to <a href="{% url 'login' %}">login</a> to leave a comment.</p>
+    {% endif %}
+{% endblock %}
