@@ -47,3 +47,24 @@ A simple and functional blog application built with Django. This blog allows use
 ### 1. Clone the repository
 ```bash
 https://github.com/Lorencoshametaj/Django-Blog.git
+cd your-repo-name
+
+2. Create a virtual environment and activate it
+python -m venv env
+source env/bin/activate   # On Windows use `env\Scripts\activate`
+
+3. Install dependencies
+pip install -r requirements.txt
+
+4. Apply database migrations
+python manage.py migrate
+
+5. Create a superuser
+python manage.py createsuperuser
+
+6. Run the development server
+python manage.py runserver
+
+The blog will now be accessible at http://127.0.0.1:8000/.
+
+
